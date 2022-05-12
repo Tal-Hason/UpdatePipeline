@@ -13,11 +13,8 @@ pipeline {
         }
         stage("Test service is Running") {
             steps{
-                timeout(5) {
-                    waitUntil {
-                        script {
-                            def r = sh script: 'wget -q http://ngnix-hello-world.application-version.svc.cluster.local:8080/index.html -O /dev/null', returnStdout: true
-                            return (r == 0);
+                 waitUntil {
+                    sh 'wget --retry-connrefused --tries=120 --waitretry=1 -q http://ngnix-hello-world.application-version.svc.cluster.local:8080/index.html -O /dev/null'
                         }
                     }
                 }
