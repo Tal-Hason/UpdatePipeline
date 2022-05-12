@@ -1,13 +1,20 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build image') {
-      steps {
-        sh 'sudo yum update -y && sudo yum install podman -y'
-        sh 'podman build -f ngnix-server:v1 https://raw.githubusercontent.com/Tal-Hason/UpdatePipeline/main/Dockerfile/Dockerfile '
-        
-      }
+    agent {
+        node { label any }
     }
+    
+    environment { QUAY = credentials('QUAY_USER') }
 
-  }
+    stages {
+        stage("Create ConfigMap") {
+            steps {
+                sh 'oc create configmap html-index --from-file=application/index.html'
+            }
+        }   
+        stage("Run Application from Docker file") {
+            steps {
+                sh 'oc new-app nginx-hello-world:1~https://github.com/sclorg/nginx-container.git --context-dir=Dockerfile'
+            }
+        }
+    }
 }
