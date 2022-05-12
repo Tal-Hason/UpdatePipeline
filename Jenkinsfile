@@ -16,7 +16,7 @@ pipeline {
                 timeout(5) {
                     waitUntil {
                         script {
-                            def r = sh script: 'wget -q http://ngnix-hello-world/index.html -O /dev/null', returnStdout: true
+                            def r = sh script: 'wget -q http://ngnix-hello-world.application-version.svc.cluster.local:8080/index.html -O /dev/null', returnStdout: true
                             return (r == 0);
                         }
                     }
