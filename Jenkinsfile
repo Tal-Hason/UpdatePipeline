@@ -1,6 +1,5 @@
 pipeline {
   agent any
-  stages {
     stages {
         stage("Create ConfigMap") {
             steps {
