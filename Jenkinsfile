@@ -23,7 +23,6 @@ pipeline {
         stage("Map ConfigMap as a Volume") {
             steps {
                 sh 'oc set volume deployments/ngnix-hello-world --add --name=index-html --type=configmap --configmap-name="html-index" --mount-path=/usr/share/nginx/html'
-            }
         }
     }
 }
