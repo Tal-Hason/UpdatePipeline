@@ -8,7 +8,7 @@ pipeline {
         }   
         stage("Run Application from Docker file") {
             steps {
-                sh 'oc new-app nginx-hello-world~https://github.com/sclorg/nginx-container.git --context-dir=Dockerfile --strategy=docker' 
+                sh 'oc new-app nginx-hello-world~https://github.com/sclorg/nginx-container.git#main --context-dir=Dockerfile --strategy=docker' 
             }
         }
         stage("Map ConfigMap as a Volume") {
