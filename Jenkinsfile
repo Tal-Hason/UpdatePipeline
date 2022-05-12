@@ -14,7 +14,7 @@ pipeline {
         stage("Test service is Running") {
             steps{
                  waitUntil {
-                    sh 'wget --retry-connrefused --tries=120 --waitretry=1 -q http://ngnix-hello-world.application-version.svc.cluster.local:8080/index.html -O /dev/null'
+                    sh 'wget --retry-connrefused --tries=120 --waitretry=1 http://ngnix-hello-world.application-version.svc.cluster.local:8080/index.html -O /dev/null'
                         }
                     }
                 }
