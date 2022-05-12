@@ -1,10 +1,6 @@
 pipeline {
-    agent {
-        node { label any }
-    }
-    
-    environment { QUAY = credentials('QUAY_USER') }
-
+  agent any
+  stages {
     stages {
         stage("Create ConfigMap") {
             steps {
@@ -22,4 +18,5 @@ pipeline {
             }
         }
     }
+  }
 }
