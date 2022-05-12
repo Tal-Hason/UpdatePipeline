@@ -16,5 +16,10 @@ pipeline {
                 sh 'oc new-app nginx-hello-world:1~https://github.com/sclorg/nginx-container.git --context-dir=Dockerfile'
             }
         }
+        stage("Map ConfigMap as a Volume") {
+            steps {
+                sh 'oc set volume deployments/nginx-hello-world --add --name=index-html --type=configmap --configmap-name="html-index" --mount-path=/usr/share/nginx/html'
+            }
+        }
     }
 }
