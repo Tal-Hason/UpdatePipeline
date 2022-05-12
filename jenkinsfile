@@ -9,7 +9,7 @@ pipeline {
         stage("Create ConfigMap") {
             steps {
                 sh 'oc create configmap html-index --from-file=application/index.html'
- `           }
+           }
         }   
         stage("Run Application from Docker file") {
             steps {
