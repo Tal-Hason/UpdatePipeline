@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Create ConfigMap") {
             steps {
-                sh 'oc create configmap html-index --from-file=index.html --dry-run=client -o yaml | oc apply -f -'
+                sh 'oc create configmap html-index --from-file=application/index.html --dry-run=client -o yaml | oc apply -f -'
            }
         }   
         stage("Run Application from Docker file") {
