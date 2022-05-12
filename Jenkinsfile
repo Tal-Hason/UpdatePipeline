@@ -1,11 +1,6 @@
 pipeline {
   agent any
     stages {
-        stage("Create New Project") {
-            steps {
-                sh 'oc new-project ngnix-hello-world'
-           }
-        }
         stage("Create ConfigMap") {
             steps {
                 sh 'oc create configmap html-index --from-file=application/index.html --dry-run=client -o yaml | oc apply -f -'
